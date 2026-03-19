@@ -1,5 +1,14 @@
 def load_html(file_path):
-    """ Load a HTML file """
+    """
+    Reads the content of an HTML file from the specified path.
+
+    Args:
+        file_path (str): The path to the HTML file to be loaded.
+
+    Returns:
+        str: The content of the file as a string.
+             Returns an empty string if the file is not found or an error occurs.
+    """
 
     try:
         with open(file_path, "r") as file:
@@ -19,7 +28,16 @@ def load_html(file_path):
 
 
 def save_html(file_path, content):
-    """ Save a HTML file """
+    """
+    Writes the provided HTML content to a file at the given path.
+
+    Args:
+        file_path (str): The destination path where the file should be saved.
+        content (str): The HTML string to be written into the file.
+
+    Returns:
+        None
+    """
 
     try:
         with open(file_path, "w") as file:
@@ -33,7 +51,17 @@ def save_html(file_path, content):
 
 
 def serialize_movie(title, year, image):
-    """ Serialize a movie """
+    """
+    Generate an HTML list item representing a movie with its poster, title, and year.
+
+    Args:
+        title (str): The title of the movie.
+        year (str or int): The release year of the movie.
+        image (str): The URL or path to the movie's poster image.
+
+    Returns:
+        str: An HTML string representing the movie as a list item.
+    """
 
     output_string = ''
     output_string += '<li>'

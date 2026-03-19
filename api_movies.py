@@ -8,11 +8,29 @@ API_KEY = os.getenv('API_KEY')
 
 
 def normalize(text):
+    """
+        Removes special characters from a string, keeping only alphanumeric characters and spaces.
+
+    Args:
+        text (str): The string to be normalized.
+
+    Returns:
+        str: The cleaned string with special characters replaced by spaces.
+    """
     return re.sub(r"[^a-zA-Z0-9]", " ", text)
 
 
 def get_movie(t: str):
-    """Send a request to get a movie from the API."""
+    """
+    Fetches movie details from the OMDb API based on a title.
+
+    Args:
+        t (str): The title of the movie to search for.
+
+    Returns:
+        tuple: A tuple containing (title, year, rating, image) if found.
+        list: An empty list if the movie is not found or a network error occurs.
+    """
 
     url_api = "https://www.omdbapi.com"
 

@@ -29,8 +29,13 @@ with engine.connect() as connection:
 
 
 def list_movies():
-    """Retrieve all movies from the database"""
+    """
+    Retrieves all movies from the 'movies' table in the database.
 
+    Returns:
+        list: A list of rows (tuples) containing (title, year, rating, image).
+        bool: False if a database or programming error occurs.
+    """
     with engine.connect() as connection:
         try:
             result = connection.execute(text("SELECT title, year, rating,image FROM movies"))
@@ -49,8 +54,18 @@ def list_movies():
 
 
 def add_movie(title: str, year: int, rating: float, image: str):
-    """Add a new movie to the database"""
+    """
+    Adds a new movie entry to the database.
 
+    Args:
+        title (str): The unique title of the movie.
+        year (int): The release year.
+        rating (float): The movie's rating (0.0 to 10.0).
+        image (str): URL or path to the movie poster image.
+
+    Returns:
+        bool: True if the movie was added successfully, False otherwise.
+    """
     with engine.connect() as connection:
         try:
             connection.execute(
@@ -81,7 +96,15 @@ def add_movie(title: str, year: int, rating: float, image: str):
 
 
 def delete_movie(title: str):
-    """Delete a movie from the database"""
+    """
+    Deletes a movie from the database based on its title (case-insensitive).
+
+    Args:
+        title (str): The title of the movie to delete.
+
+    Returns:
+        bool: True if the operation was executed, False if an error occurred.
+    """
 
     with engine.connect() as connection:
         try:
@@ -102,7 +125,16 @@ def delete_movie(title: str):
 
 
 def update_movie(title: str, rating: float):
-    """Update a movie's rating in the database"""
+    """
+    Updates the rating of an existing movie in the database.
+
+    Args:
+        title (str): The title of the movie to update (case-insensitive).
+        rating (float): The new rating to be assigned.
+
+    Returns:
+        bool: True if the update was successful, False otherwise.
+    """
 
     with engine.connect() as connection:
         try:
@@ -125,6 +157,3 @@ def update_movie(title: str, rating: float):
             connection.rollback()
             print(f"Invalid data format")
             return False
-
-
-print(list_movies())
