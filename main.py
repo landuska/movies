@@ -36,7 +36,7 @@ def get_user_input():
     """
 
     while True:
-        user_input_title = input(Fore.GREEN + "Please enter the movie title: ").strip()
+        user_input_title = api.normalize(input(Fore.GREEN + "Please enter the movie title: ")).strip()
 
         if user_input_title:
             return user_input_title

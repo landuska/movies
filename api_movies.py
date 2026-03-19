@@ -1,9 +1,14 @@
 import requests
 import os
 from dotenv import load_dotenv
+import re
 
 load_dotenv(dotenv_path="config/.env")
 API_KEY = os.getenv('API_KEY')
+
+
+def normalize(text):
+    return re.sub(r"[^a-zA-Z0-9]", " ", text)
 
 
 def get_movie(t: str):
@@ -28,8 +33,8 @@ def get_movie(t: str):
         print(f"Movie '{t}' not found")
         return []
 
-    title = data.get("Title", "Unknown Title")
-    year = data.get("Year", "Unknown Year")
+    title = normalize(data.get("Title", "Unknown Title"))
+    year = normalize(data.get("Year", "Unknown Year"))
     rating = data.get("imdbRating", None)
     image = data.get("Poster", None)
 
