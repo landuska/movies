@@ -1,7 +1,16 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError, DataError
+import os
 
-DB_URL = "sqlite:///data/movies.db"
+# absolute path to current file
+current_file_path = os.path.abspath(__file__)
+# path to the folder where the file is located
+current_dir = os.path.dirname(current_file_path)
+# path to the folder where the previous folder is located
+project_root = os.path.dirname(current_dir)
+
+db_path = os.path.join(project_root, "data", "movies.db")
+DB_URL = f"sqlite:///{db_path}"
 
 engine = create_engine(DB_URL)
 
@@ -116,3 +125,6 @@ def update_movie(title: str, rating: float):
             connection.rollback()
             print(f"Invalid data format")
             return False
+
+
+print(list_movies())
